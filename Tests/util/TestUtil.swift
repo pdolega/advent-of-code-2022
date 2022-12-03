@@ -2,7 +2,7 @@ import Foundation
 
 class TestUtil {
 
-    static func readInput(fileName: String) throws -> String {
+    static func readInputLines(fileName: String) throws -> [String] {
         print("Current working path is: \(FileManager.default.currentDirectoryPath)")
 
         let path = FileManager.default.currentDirectoryPath
@@ -11,7 +11,7 @@ class TestUtil {
         do {
             let text = try String(contentsOf: fileUrl, encoding: .utf8)
             print("Found file at \(fileUrl)...")
-            return text
+            return text.components(separatedBy: "\n")
         } catch {
             print("File not found at \(fileUrl)...")
             print(error)
