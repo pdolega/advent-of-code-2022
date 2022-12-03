@@ -50,7 +50,7 @@ final class CaloriesTest: XCTestCase {
     }
 
     private func toIntLines() throws -> [Int?] {
-        let readLines = try TestUtil.readInputLines(fileName: "day01-1.txt")
+        let readLines = try TestUtil.readInputLines(fileName: "day01.txt")
         return readLines.map({ line in
             line.isEmpty ? nil : Int(line)
         })
