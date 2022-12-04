@@ -11,8 +11,7 @@ class RucksackSorting {
 
         items.forEach { (content: String) in
             let halfSize = content.count/2
-            let firstComp = content.prefix(halfSize)
-            let secondComp = content.suffix(halfSize)
+            let (firstComp, secondComp) = (content.prefix(halfSize), content.suffix(halfSize))
 
             let intersection = Set(firstComp).intersection(secondComp)
             assert(intersection.count == 1, "There should be only 1 repeated element")
@@ -27,7 +26,7 @@ class RucksackSorting {
 
     func countBadgePriorities(items: [String]) -> Int {
         var prioritySum = 0
-        var triples = convertToTriples(items: items)
+        let triples = convertToTriples(items: items)
 
         triples.forEach { triple in
             let badge = triple.reduce(Set(triple.first!)) { intersection, element in
