@@ -32,7 +32,7 @@ class RucksackSorting {
             let badge = triple.reduce(Set(triple.first!)) { intersection, element in
                 intersection.intersection(element)
             }
-            assert(badge.count == 1, "Only 1 common element should have been found")
+            assert(badge.count == 1, "Only 1 common element should have been found: \(triple)")
             prioritySum += priority(letter: badge.first!)
         }
 
@@ -41,7 +41,7 @@ class RucksackSorting {
 
     private func convertToTriples(items: [String]) -> [[String]] {
         var triples: [[String]] = []
-        items.reduce([]) { (triple: [String], elem: String) in
+        _ = items.reduce([]) { (triple: [String], elem: String) in
             let triple = triple.count < 3 ? triple + [elem] : [elem]
 
             if triple.count == 3 {
