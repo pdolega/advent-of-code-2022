@@ -30,7 +30,7 @@ class RucksackSorting {
 
         triples.forEach { triple in
             let badge = triple.reduce(Set(triple.first!)) { intersection, element in
-                intersection.intersection(element)
+                intersection.intersection(Set(element))
             }
             assert(badge.count == 1,
                     "Only 1 common element should have been found but found: '\(badge)' (triple: \(triple))"
