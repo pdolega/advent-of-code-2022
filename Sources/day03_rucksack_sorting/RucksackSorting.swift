@@ -32,7 +32,9 @@ class RucksackSorting {
             let badge = triple.reduce(Set(triple.first!)) { intersection, element in
                 intersection.intersection(element)
             }
-            assert(badge.count == 1, "Only 1 common element should have been found: \(triple)")
+            assert(badge.count == 1,
+                    "Only 1 common element should have been found but found: '\(badge)' (triple: \(triple))"
+            )
             prioritySum += priority(letter: badge.first!)
         }
 
