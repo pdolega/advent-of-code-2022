@@ -26,8 +26,7 @@ let package = Package(
         .testTarget(
             name: "Test",
             dependencies: ["Source"],
-            path: "./Tests",
-            resources: [.copy("Inputs")]
+            path: "./Tests"
         )
     ]
 )

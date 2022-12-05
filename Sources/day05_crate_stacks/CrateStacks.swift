@@ -6,7 +6,7 @@ struct Movement: Equatable {
     let to: Int
 
     static func ==(lhs: Movement, rhs: Movement) -> Bool {
-        return lhs.number == rhs.number && lhs.from == rhs.from && lhs.from == rhs.from
+        lhs.number == rhs.number && lhs.from == rhs.from && lhs.from == rhs.from
     }
 }
 
@@ -68,14 +68,14 @@ class CrateStacks {
 
 class InputParser {
     func parseInput(input: [String]) -> ([[String]], [Movement]) {
-        let indexOfEndOfDescription = input.index { $0.isEmpty }!
+        let indexOfEndOfDescription = input.firstIndex(where:  { $0.isEmpty })!
         let stackDescription = input[..<(indexOfEndOfDescription)]
         let movementDescription = input[(indexOfEndOfDescription + 1)...]
 
-        var stacks = parseStacks(stackDescription: Array(stackDescription))
-        let movements = parseMoves(movementDescription: movementDescription)
-
-        return (stacks, movements)
+        return (
+                parseStacks(stackDescription: Array(stackDescription)),
+                parseMoves(movementDescription: movementDescription)
+        )
     }
 
     private func parseMoves(movementDescription: ArraySlice<String>) -> [Movement] {
@@ -100,19 +100,19 @@ class InputParser {
     }
 
     private func parseStacks(stackDescription: [String]) -> [[String]] {
-        let stackNumber = parseNumberOfStacks(stackDescription: stackDescription)
         let charsPerStack = 4
 
-        var stacks: [[String]] = Array(repeating: [], count: stackNumber)
+        var stacks: [[String]] = []
 
         stackDescription[0..<stackDescription.count - 1].forEach { line in
-            for var (stackNo, stack) in stacks.enumerated() {
-                if line.count < stackNo * charsPerStack {
-                    break
+            var stackNo = 0
+            for windowStart in stride(from: 0, to: line.count, by: charsPerStack) {
+                if stackNo >= stacks.count {
+                    stacks.append([])
                 }
 
-                let start = line.index(line.startIndex, offsetBy: stackNo * charsPerStack)
-                let end = line.index(line.startIndex, offsetBy: stackNo * charsPerStack + charsPerStack - 1)
+                let start = line.index(line.startIndex, offsetBy: windowStart)
+                let end = line.index(line.startIndex, offsetBy: windowStart + charsPerStack - 1)
 
                 let stackSlice = line[start..<end].trimmingCharacters(in: .whitespaces)
 
@@ -120,30 +120,12 @@ class InputParser {
                     let stackNameIdx = stackSlice.index(stackSlice.startIndex, offsetBy: 1)
                     stacks[stackNo].append(String(stackSlice[stackNameIdx]))
                 }
+
+                stackNo += 1
             }
         }
 
-        print("Number of stacks is: \(stackNumber); stacks are: \(stacks)")
         return stacks
-    }
-
-    private func parseNumberOfStacks(stackDescription: [String]) -> Int {
-        let lineRegex = try! NSRegularExpression(pattern: #"^(\s\d\s*)+$"#, options: [])
-
-        let stackNumbersLine = stackDescription.first { line in
-            let range = NSRange(line.startIndex..<line.endIndex, in: line)
-            let matches = lineRegex.matches(in: line, range: range)
-
-            return matches.first != nil
-        }!
-
-        let numberRegex = try! NSRegularExpression(pattern: #"\d"#, options: [])
-        let numberRange = NSRange(stackNumbersLine.startIndex..<stackNumbersLine.endIndex, in: stackNumbersLine)
-        let matches = numberRegex.matches(in: stackNumbersLine, range: numberRange)
-
-        let stackNumber = matches.count
-
-        return stackNumber
     }
 }
 
