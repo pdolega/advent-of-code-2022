@@ -79,14 +79,8 @@ class DeviceSpace {
     }
 
     private func parseCd(line: String) -> CdCommand? {
-        let pattern = #"\$ cd (.+)"#
-        let regex = try! NSRegularExpression(pattern: pattern, options: [])
-
-        let range = NSRange(line.startIndex..<line.endIndex, in: line)
-        let matches = regex.matches(in: line, range: range)
-
-        if let match = matches.first {
-            let target = line[Range(match.range(at: 1), in: line)!]
+        if let captures = Util.firstRegexMatch(string: line, pattern: #"\$ cd (.+)"#) {
+            let target = captures[1]
             return CdCommand(target: String(target))
         } else {
             return nil
@@ -94,15 +88,9 @@ class DeviceSpace {
     }
 
     private func parseFileOutput(line: String) -> File? {
-        let pattern = #"(\d+) (.+)"#
-        let regex = try! NSRegularExpression(pattern: pattern, options: [])
-
-        let range = NSRange(line.startIndex..<line.endIndex, in: line)
-        let matches = regex.matches(in: line, range: range)
-
-        if let match = matches.first {
-            let size = line[Range(match.range(at: 1), in: line)!]
-            let name = line[Range(match.range(at: 2), in: line)!]
+        if let captures = Util.firstRegexMatch(string: line, pattern: #"(\d+) (.+)"#) {
+            let size = captures[1]
+            let name = captures[2]
             return File(name: String(name), size: Int(size)!)
         } else {
             return nil
