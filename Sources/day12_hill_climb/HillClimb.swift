@@ -9,11 +9,6 @@ class Node: Equatable, Hashable {
         self.y = y
     }
 
-    init(pair: (Int, Int)) {
-        x = pair.0
-        y = pair.1
-    }
-
     func hash(into hasher: inout Hasher) {
         hasher.combine(x)
         hasher.combine(y)
@@ -31,7 +26,6 @@ extension Node: CustomStringConvertible {
 }
 
 class HillClimb {
-
     let baseHeight = Int(Character("a").asciiValue!)
 
     func findShortestPath(input: [String]) -> Int {
@@ -41,7 +35,7 @@ class HillClimb {
 
     func findShortestFromAllPaths(input: [String]) -> Int {
         let (map, _, targetPosition) = parseInput(input: input)
-        let startPoints = generateStartingPoints(map: map)
+        let startPoints = map.filter { (key: Node, value: Int) in value == 0 }.keys
 
         let minShortestPath = startPoints.map { startNode in
             findShortestPath(startNode: startNode, targetNode: targetPosition, map: map)
@@ -52,7 +46,7 @@ class HillClimb {
         return minShortestPath
     }
 
-    private func findShortestPath(startNode: Node, targetNode: Node, map: [[Int]]) -> Int? {
+    private func findShortestPath(startNode: Node, targetNode: Node, map: [Node: Int]) -> Int? {
         var visited: Set<Node> = Set([startNode])
         var previousTrail: [Node:Node] = [startNode: Node(x: -1, y: -1)]
         var queue: [Node] = [startNode]
@@ -88,7 +82,7 @@ class HillClimb {
         return count
     }
 
-    private func getPossibleMoves(currentPosition: Node, visited: Set<Node>, map: [[Int]]) -> [Node] {
+    private func getPossibleMoves(currentPosition: Node, visited: Set<Node>, map: [Node: Int]) -> [Node] {
         let options: [Node] = [
             Node(x: currentPosition.x - 1, y: currentPosition.y), // left
             Node(x: currentPosition.x + 1, y: currentPosition.y), // right
@@ -96,25 +90,21 @@ class HillClimb {
             Node(x: currentPosition.x, y: currentPosition.y + 1), // down
         ]
 
-        let xRange = 0..<map.first!.count
-        let yRange = 0..<map.count
         return options
-                    .filter { xRange.contains($0.x) && yRange.contains($0.y) }
+                    .filter { map[$0] != nil }
                     .filter { option in
-                        let targetHeight = map[option.y][option.x]
-                        let currentHeight = map[currentPosition.y][currentPosition.x]
+                        let targetHeight = map[option]!
+                        let currentHeight = map[currentPosition]!
                         return targetHeight <= currentHeight + 1  && !visited.contains(option)
                     }
     }
 
-    private func parseInput(input: [String]) -> ([[Int]], Node, Node) {
-        var map: [[Int]] = []
+    private func parseInput(input: [String]) -> ([Node: Int], Node, Node) {
+        var map: [Node: Int] = [:]
         var startingPosition: Node? = nil
         var targetPosition: Node? = nil
 
         for row in 0..<input.count {
-            var mapLine: [Int] = []
-
             var col = 0
             input[row].forEach { char in
                 var height = -1
@@ -127,26 +117,11 @@ class HillClimb {
                 } else {
                     height =  Int(char.asciiValue!) - baseHeight
                 }
-                mapLine.append(height)
+                map[Node(x: col, y: row)] = height
                 col += 1
             }
-
-            map.append(mapLine)
         }
 
         return (map, startingPosition!, targetPosition!)
-    }
-
-    private func generateStartingPoints(map: [[Int]]) -> [Node] {
-        var startPoints: [Node] = []
-
-        for row in 0..<map.count {
-            for col in 0..<map.first!.count {
-                if map[row][col] == 0 {
-                    startPoints.append(Node(x: col, y: row))
-                }
-            }
-        }
-        return startPoints
     }
 }
