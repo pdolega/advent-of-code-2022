@@ -73,13 +73,13 @@ class LineMovement {
 
         switch directionCode {
             case "R":
-                newPosition.x += 1
+                newPosition = newPosition.moveBy(x: 1)
             case "L":
-                newPosition.x += -1
+                newPosition = newPosition.moveBy(x: -1)
             case "U":
-                newPosition.y += 1
+                newPosition = newPosition.moveBy(y: 1)
             case "D":
-                newPosition.y -= 1
+                newPosition = newPosition.moveBy(y: -1)
             default:
                 assertionFailure("Incorrect direction: \(directionCode)")
         }

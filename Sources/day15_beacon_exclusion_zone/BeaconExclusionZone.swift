@@ -10,8 +10,8 @@ class BeaconExclusionZone {
     }
 
     func countCoverageAtRow(input: [String], y: Int) -> Int {
-        var pointsRange = parseInput(input: input)
-        var coverage = calculateCoverageAtRow(pointsRange: pointsRange, rowToCheck: y)
+        let pointsRange = parseInput(input: input)
+        let coverage = calculateCoverageAtRow(pointsRange: pointsRange, rowToCheck: y)
 
         var count = coverage.reduce(0) { sum, range in
             sum + range.count
@@ -27,7 +27,7 @@ class BeaconExclusionZone {
     }
 
     func calculateTuningFrequency(input: [String], mapRange: ClosedRange<Int>) -> Int {
-        var pointsRange = parseInput(input: input)
+        let pointsRange = parseInput(input: input)
 
         let pointNotCovered = Util.timed(description: "Finding coverage") {
             findNotCoveredPoint(mapRange: mapRange, pointsRange: pointsRange)!
@@ -38,7 +38,7 @@ class BeaconExclusionZone {
 
     private func findNotCoveredPoint(mapRange: ClosedRange<Int>, pointsRange: [SensorRange]) -> Point? {
         for y in mapRange {
-            var rowCoverage = calculateCoverageAtRow(pointsRange: pointsRange, rowToCheck: y)
+            let rowCoverage = calculateCoverageAtRow(pointsRange: pointsRange, rowToCheck: y)
             assert(rowCoverage.count <= 2, "Count should be at most 2 (row: \(y))")
 
             var foundGap = true
@@ -75,7 +75,7 @@ class BeaconExclusionZone {
         var newRanges: [ClosedRange<Int>] = [rangesAtRow.first!]
 
         rangesAtRow.forEach { range in
-            var prevRange = newRanges.last!
+            let prevRange = newRanges.last!
 
             if prevRange.upperBound >= range.lowerBound - 1 {
                 newRanges.removeLast()

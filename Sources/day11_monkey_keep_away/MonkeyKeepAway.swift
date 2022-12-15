@@ -48,7 +48,7 @@ class MonkeyKeepAway {
             }
 
             // debug
-            if [1, 20, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000].contains { $0 == round } {
+            if ([1, 20, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000].contains { $0 == round }) {
                 print("Round \(round) finished")
                 for monkey in monkeys {
                     print(monkey)
@@ -108,7 +108,7 @@ class MonkeyKeepAway {
     private func parseOperation(monkeyInt: Int, line: String) -> ((Int) -> Int)? {
         if let captures = Util.firstRegexMatch(string: line, pattern: #"Operation: new = old (\+|\*) (.+)"#) {
             let mathOperator = captures[1]
-            var operatorLambda = parseMathOperation(mathOperator: mathOperator)
+            let operatorLambda = parseMathOperation(mathOperator: mathOperator)
 
             let secondVal = captures[2]
             let secondValInt: Int? = Int(secondVal)

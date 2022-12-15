@@ -1,11 +1,15 @@
 import Foundation
 
 struct Point: Equatable, Hashable {
-    var x: Int
-    var y: Int
+    let x: Int
+    let y: Int
 
     func isAdjacent(other: Point) -> Bool {
         abs(x - other.x) <= 1 && abs(y - other.y) <= 1
+    }
+
+    func moveBy(x: Int = 0, y: Int = 0) -> Point {
+        Point(x: self.x + x, y: self.y + y)
     }
 
     func hash(into hasher: inout Hasher) {
@@ -42,6 +46,26 @@ class Util {
         } else {
             return nil
         }
+    }
+
+    static func multipleRegexMatch(string: String, pattern: String) -> [[String]] {
+        let regex = try! NSRegularExpression(pattern: pattern, options: [])
+
+        let range = NSRange(string.startIndex..<string.endIndex, in: string)
+        let matches = regex.matches(in: string, range: range)
+
+        var captures: [[String]] = []
+        for (idx, match) in matches.enumerated() {
+            var captureGroups: [String] = []
+            for rangeIdx in 0..<match.numberOfRanges {
+                captureGroups.append(
+                        String(string[Range(match.range(at: rangeIdx), in: string)!])
+                )
+            }
+            captures.append(captureGroups)
+        }
+
+        return captures
     }
 
     static func timed<T>(description: String, logic: ()->T) -> T {
