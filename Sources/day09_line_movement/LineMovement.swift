@@ -2,24 +2,6 @@ import Foundation
 
 class LineMovement {
 
-    struct Point: Equatable, Hashable {
-        var x: Int
-        var y: Int
-
-        func isAdjacent(other: Point) -> Bool {
-            abs(x - other.x) <= 1 && abs(y - other.y) <= 1
-        }
-
-        func hash(into hasher: inout Hasher) {
-            hasher.combine(x)
-            hasher.combine(y)
-        }
-
-        static func == (lhs: Point, rhs: Point) -> Bool {
-            lhs.x == rhs.x && lhs.y == rhs.y
-        }
-    }
-
     func calculateSingleTailMovement(input: [String]) -> Int {
         var headPosition = Point(x: 0, y: 0)
         var tailPosition = Point(x: 0, y: 0)
@@ -40,7 +22,7 @@ class LineMovement {
                     tailPosition = newTailPosition
                 }
 
-//                print("Head:: (\(headPosition.x), \(headPosition.y)) -> Tail:: (\(tailPosition.x), \(tailPosition.y)) [Move: \(move)]")
+//                print("Head:: \(headPosition) -> Tail:: \(tailPosition) [Move: \(move)]")
             }
 
 //            print()
@@ -76,8 +58,8 @@ class LineMovement {
                 }
 
                 tailPath.insert(linePositions.last!)
-//                print("Head:: (\(linePositions.first!.x), \(linePositions.first!.y)) -> " +
-//                        "Tail:: (\(linePositions.last!.x), \((linePositions.last!.y)) [Move: \(move)]")
+//                print("Head:: \(linePositions.first!) -> " +
+//                        "Tail:: \(linePositions.last!) [Move: \(move)]")
             }
 
 //            print()
