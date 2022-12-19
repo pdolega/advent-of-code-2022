@@ -55,7 +55,7 @@ class Util {
         let matches = regex.matches(in: string, range: range)
 
         var captures: [[String]] = []
-        for (idx, match) in matches.enumerated() {
+        for match in matches {
             var captureGroups: [String] = []
             for rangeIdx in 0..<match.numberOfRanges {
                 captureGroups.append(
@@ -69,7 +69,7 @@ class Util {
     }
 
     static func timed<T>(description: String, logic: ()->T) -> T {
-        var startTime = DispatchTime.now().uptimeNanoseconds
+        let startTime = DispatchTime.now().uptimeNanoseconds
 
         defer {
             let diff = DispatchTime.now().uptimeNanoseconds - startTime

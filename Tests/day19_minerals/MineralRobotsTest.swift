@@ -5,7 +5,7 @@ import XCTest
 
 @testable import Source
 
-final class MineralRobots: XCTestCase {
+final class MineralRobotsTest: XCTestCase {
 
     private let testData = """
                            Blueprint 1: Each ore robot costs 4 ore. Each clay robot costs 2 ore. Each obsidian robot costs 3 ore and 14 clay. Each geode robot costs 2 ore and 7 obsidian.
