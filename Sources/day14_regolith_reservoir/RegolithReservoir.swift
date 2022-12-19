@@ -21,7 +21,6 @@ class RegolithReservoir {
             } else if !filledSpace.contains(candidate.moveBy(x: 1)) {
                 currentPosition = candidate.moveBy(x: 1)
             } else {
-                print("No place to put it, it rests here at: \(currentPosition)")
                 filledSpace.insert(currentPosition)
                 sandCount += 1
 
@@ -46,7 +45,6 @@ class RegolithReservoir {
             let candidate = currentPosition.moveBy(y: 1)
 
             if candidate.y == bottomY {
-                print("Reached bottom: \(currentPosition)")
                 filledSpace.insert(currentPosition)
                 sandCount += 1
 
@@ -61,7 +59,6 @@ class RegolithReservoir {
             } else if !filledSpace.contains(candidate.moveBy(x: 1)) {
                 currentPosition = candidate.moveBy(x: 1)
             } else {
-                print("No place to put it, it rests here at: \(currentPosition)")
                 filledSpace.insert(currentPosition)
                 sandCount += 1
 

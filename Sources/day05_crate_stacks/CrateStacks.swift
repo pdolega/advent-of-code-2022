@@ -19,14 +19,14 @@ class CrateStacks {
 
     func calculateRearrangement(inputLines: [String]) -> String {
         let input = InputParser().parseInput(input: inputLines)
-        printStack(stacks: input.0)
+//        printStack(stacks: input.0)
 
         return performRearrangements(positions: input.0, movements: input.1, craneModel: CraneVersion.CrateMover_9000)
     }
 
     func calculateRearrangement2ndCrane(inputLines: [String]) -> String {
         let input = InputParser().parseInput(input: inputLines)
-        printStack(stacks: input.0)
+//        printStack(stacks: input.0)
 
         return performRearrangements(positions: input.0, movements: input.1, craneModel: CraneVersion.CrateMover_9001)
     }

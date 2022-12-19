@@ -48,12 +48,12 @@ class MonkeyKeepAway {
             }
 
             // debug
-            if ([1, 20, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000].contains { $0 == round }) {
-                print("Round \(round) finished")
-                for monkey in monkeys {
-                    print(monkey)
-                }
-            }
+//            if ([1, 20, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000].contains { $0 == round }) {
+//                print("Round \(round) finished")
+//                for monkey in monkeys {
+//                    print(monkey)
+//                }
+//            }
         }
 
         monkeys.sort { $0.inspections > $1.inspections  }
