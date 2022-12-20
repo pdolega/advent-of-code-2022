@@ -72,7 +72,7 @@ class RegolithReservoir {
     private func parseInput(input: [String]) -> Set<Point> {
         let pointLines = parsePointLines(input: input)
         let filledSpaceArr = fillSpace(pointLines: pointLines)
-        print("Parsed point lines: \(filledSpaceArr)")
+//        print("Parsed point lines: \(filledSpaceArr)")
 
         return Set(filledSpaceArr)
     }
