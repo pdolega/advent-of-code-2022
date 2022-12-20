@@ -29,7 +29,7 @@ class MonkeyKeepAway {
         var monkeys = parseInput(input: input)
         let overflowLimit = monkeys.reduce(1) { (res, next) in res * next.divisibleByTest }
 
-        for round in 1...rounds {
+        for _ in 1...rounds {
             for monkey in monkeys {
 
                 let oldItems = monkey.items

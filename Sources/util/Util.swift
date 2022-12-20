@@ -68,14 +68,17 @@ class Util {
         return captures
     }
 
-    static func timed<T>(description: String, logic: ()->T) -> T {
+    static func timingMsg<T>(description: String, logic: ()->T) -> T {
+        let (results, diff) = timed(logic: logic)
+        print("Processed: \(description) in \(diff/1_000_000)ms")
+        return results
+    }
+
+    static func timed<T>(logic: ()->T) -> (T, UInt64) {
         let startTime = DispatchTime.now().uptimeNanoseconds
+        let results = logic()
+        let diff = DispatchTime.now().uptimeNanoseconds - startTime
 
-        defer {
-            let diff = DispatchTime.now().uptimeNanoseconds - startTime
-            print("Processed: \(description) in \(diff/1_000_000)ms")
-        }
-
-        return logic()
+        return (results, diff)
     }
 }

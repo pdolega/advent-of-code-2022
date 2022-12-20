@@ -29,7 +29,7 @@ class BeaconExclusionZone {
     func calculateTuningFrequency(input: [String], mapRange: ClosedRange<Int>) -> Int {
         let pointsRange = parseInput(input: input)
 
-        let pointNotCovered = Util.timed(description: "Finding coverage") {
+        let pointNotCovered = Util.timingMsg(description: "Finding coverage") {
             findNotCoveredPoint(mapRange: mapRange, pointsRange: pointsRange)!
         }
 
