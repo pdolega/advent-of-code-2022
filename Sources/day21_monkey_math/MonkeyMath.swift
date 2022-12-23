@@ -144,7 +144,7 @@ class MonkeyMath {
     }
 
     func calculateHumnUknown(input: [String]) -> Int {
-        var monkeys = parseInput(input: input)
+        let monkeys = parseInput(input: input)
         let monkeyMap = buildDeps(monkeys: monkeys)
         let result = unknownCalculation(monkeys: monkeyMap)
 
@@ -179,10 +179,10 @@ class MonkeyMath {
         let simplifiedRoot = simplify(monkey: root) as? MonkeyExpr
 
 
-        var (rootLeft, rootRight) = (simplifiedRoot!.leftMonkey, simplifiedRoot!.rightMonkey)
+        let (rootLeft, rootRight) = (simplifiedRoot!.leftMonkey, simplifiedRoot!.rightMonkey)
 
         let rootValue = (rootLeft is MonkeyVal ? rootLeft : rootRight) as? MonkeyVal
-        var rootExpr = (rootLeft is MonkeyExpr ? rootLeft : rootRight) as? MonkeyExpr
+        let rootExpr = (rootLeft is MonkeyExpr ? rootLeft : rootRight) as? MonkeyExpr
         return calculateUnknownValue(rootExpr: rootExpr!, initialValue: rootValue!).result
     }
 
@@ -190,7 +190,7 @@ class MonkeyMath {
         var expr: (any MonkeyTree)? = rootExpr
         var rootValue = initialValue
 
-        while var currentExpr = expr as? MonkeyExpr  {
+        while let currentExpr = expr as? MonkeyExpr  {
             switch (currentExpr.leftMonkey, currentExpr.operation, currentExpr.rightMonkey) {
                 case (let left, .Add, let right as MonkeyVal):
                     rootValue = rootValue.map { $0 - right.result }
