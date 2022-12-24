@@ -23,11 +23,11 @@ final class BlizzardBasinTest: XCTestCase {
         )
     }
 
-    func testRealInputTravelOnce() throws {
-        XCTAssertEqual(
-            BlizzardBasin().findPath(input: try readLines()),  251
-        )
-    }
+//    func testRealInputTravelOnce() throws {
+//        XCTAssertEqual(
+//            BlizzardBasin().findPath(input: try readLines()),  251
+//        )
+//    }
 
     // 2nd part
     func testSimpleTravelStages() throws {
@@ -36,11 +36,11 @@ final class BlizzardBasinTest: XCTestCase {
         )
     }
 
-    func testRealInputTravelStages() throws {
-        XCTAssertEqual(
-            BlizzardBasin().findPath(input: try readLines(), tripLegs: 3),  758
-        )
-    }
+//    func testRealInputTravelStages() throws {
+//        XCTAssertEqual(
+//            BlizzardBasin().findPath(input: try readLines(), tripLegs: 3),  758
+//        )
+//    }
 
     private func readLines() throws -> [String] {
         try TestUtil.readInputLines(fileName: "day24.txt")

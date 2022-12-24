@@ -32,11 +32,11 @@ final class MonkeyMathTest: XCTestCase {
         )
     }
 
-    func testRealInputMixOnce() throws {
-        XCTAssertEqual(
-            MonkeyMath().calculateAllKnown(input: try readLines()),  87457751482938 // too low
-        )
-    }
+//    func testRealInputMixOnce() throws {
+//        XCTAssertEqual(
+//            MonkeyMath().calculateAllKnown(input: try readLines()),  87457751482938
+//        )
+//    }
 
     // 2nd part
     func testSimpleMix10Times() throws {
@@ -45,11 +45,11 @@ final class MonkeyMathTest: XCTestCase {
         )
     }
 
-    func testRealInputMix10Times() throws {
-        XCTAssertEqual(
-            MonkeyMath().calculateHumnUknown(input: try readLines()),  3221245824363
-        )
-    }
+//    func testRealInputMix10Times() throws {
+//        XCTAssertEqual(
+//            MonkeyMath().calculateHumnUknown(input: try readLines()),  3221245824363
+//        )
+//    }
 
     private func readLines() throws -> [String] {
         try TestUtil.readInputLines(fileName: "day21.txt")

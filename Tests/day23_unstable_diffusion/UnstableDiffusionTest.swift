@@ -45,11 +45,11 @@ final class UnstableDiffusionTest: XCTestCase {
         XCTAssertEqual(round, 10)
     }
 
-    func testRealInputRoundLimit() throws {
-        let (emptyFields, round) = UnstableDiffusion().diffuseElves(input: try readLines(), roundLimit: 10)
-        XCTAssertEqual(emptyFields, 4116)
-        XCTAssertEqual(round, 10)
-    }
+//    func testRealInputRoundLimit() throws {
+//        let (emptyFields, round) = UnstableDiffusion().diffuseElves(input: try readLines(), roundLimit: 10)
+//        XCTAssertEqual(emptyFields, 4116)
+//        XCTAssertEqual(round, 10)
+//    }
 
     //  2nd part
     func testTrivialToStable() throws {
@@ -65,11 +65,11 @@ final class UnstableDiffusionTest: XCTestCase {
         XCTAssertEqual(round, 20)
     }
 
-    func testRealInputToStable() throws {
-        let (emptyFields, round) = UnstableDiffusion().diffuseElves(input: try readLines())
-        XCTAssertEqual(emptyFields, 17247)
-        XCTAssertEqual(round, 984)
-    }
+//    func testRealInputToStable() throws {
+//        let (emptyFields, round) = UnstableDiffusion().diffuseElves(input: try readLines())
+//        XCTAssertEqual(emptyFields, 17247)
+//        XCTAssertEqual(round, 984)
+//    }
 
     private func readLines() throws -> [String] {
         try TestUtil.readInputLines(fileName: "day23.txt")

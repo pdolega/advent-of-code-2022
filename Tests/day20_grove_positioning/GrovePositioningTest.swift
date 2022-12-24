@@ -24,11 +24,11 @@ final class GrovePositioningTest: XCTestCase {
         )
     }
 
-    func testRealInputMixOnce() throws {
-        XCTAssertEqual(
-                GrovePositioning().mixOnce(input: try readLines()),  7395 // too low
-        )
-    }
+//    func testRealInputMixOnce() throws {
+//        XCTAssertEqual(
+//                GrovePositioning().mixOnce(input: try readLines()),  7395
+//        )
+//    }
 
 //    // 2nd part
     func testSimpleMix10Times() throws {
@@ -37,11 +37,11 @@ final class GrovePositioningTest: XCTestCase {
         )
     }
 
-    func testRealInputMix10Times() throws {
-        XCTAssertEqual(
-                GrovePositioning().mix10Times(input: try readLines()),  1640221678213
-        )
-    }
+//    func testRealInputMix10Times() throws {
+//        XCTAssertEqual(
+//                GrovePositioning().mix10Times(input: try readLines()),  1640221678213
+//        )
+//    }
 
     private func readLines() throws -> [String] {
         try TestUtil.readInputLines(fileName: "day20.txt")

@@ -31,11 +31,11 @@ final class BeaconExclusionZoneTest: XCTestCase {
         )
     }
 
-    func testRealInputCoverageAtRow() throws {
-        XCTAssertEqual(
-                BeaconExclusionZone().countCoverageAtRow(input: try readLines(), y: 2_000_000), 5_508_234
-        )
-    }
+//    func testRealInputCoverageAtRow() throws {
+//        XCTAssertEqual(
+//                BeaconExclusionZone().countCoverageAtRow(input: try readLines(), y: 2_000_000), 5_508_234
+//        )
+//    }
 
     // 2nd part
     func testSimpleAllPaths() throws {
@@ -44,11 +44,11 @@ final class BeaconExclusionZoneTest: XCTestCase {
         )
     }
 
-    func testRealInputAllPaths() throws {
-        XCTAssertEqual(
-                BeaconExclusionZone().calculateTuningFrequency(input: try readLines(), mapRange: 0...4000000), 10_457_634_860_779
-        )
-    }
+//    func testRealInputAllPaths() throws {
+//        XCTAssertEqual(
+//                BeaconExclusionZone().calculateTuningFrequency(input: try readLines(), mapRange: 0...4000000), 10_457_634_860_779
+//        )
+//    }
 
     private func readLines() throws -> [String] {
         try TestUtil.readInputLines(fileName: "day15.txt")
