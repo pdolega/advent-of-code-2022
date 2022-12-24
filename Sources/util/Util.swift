@@ -28,6 +28,17 @@ extension Point: CustomStringConvertible {
     }
 }
 
+struct Dimensions {
+    let width: Int
+    let height: Int
+}
+
+extension Dimensions: CustomStringConvertible {
+    var description: String {
+        "(\(width) x \(height))"
+    }
+}
+
 class Util {
     static func firstRegexMatch(string: String, pattern: String) -> [String]? {
         let regex = try! NSRegularExpression(pattern: pattern, options: [])
