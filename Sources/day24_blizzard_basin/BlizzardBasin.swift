@@ -66,7 +66,6 @@ class BlizzardBasin {
 
         var possiblePoints: Set<State> = Set([State(point: config.startPoint, leg: 0)])
 
-        var maxMinute = 0
         var startTime = DispatchTime.now().uptimeNanoseconds
 
         printGrid(gridSize: config.size, position: config.startPoint, blocked: config.blocked, blizzards: blizzards)
@@ -131,8 +130,6 @@ class BlizzardBasin {
 
     private func newBlizzardPositions(blocked: Set<Point>, blizzards: [Point: [Dir]], gridSize: Dimensions) -> [Point: [Dir]] {
         var newBlizzards: [Point: [Dir]] = [:]
-        let maxX = gridSize.width - 2
-        let maxY = gridSize.height - 2
 
         blizzards.forEach { position, dirList in
             dirList.forEach { dir in
@@ -191,10 +188,10 @@ class BlizzardBasin {
         var blizzards: [Point: Dir] = [:]
         var blocked: Set<Point> = Set()
 
-        let startX = Array(input.first!).index(of: Character("."))!
+        let startX = Array(input.first!).firstIndex(of: Character("."))!
         let start = Point(x: startX, y: 0)
 
-        var targetX = Array(input.last!).index(of: Character("."))!
+        let targetX = Array(input.last!).firstIndex(of: Character("."))!
         let target = Point(x: targetX, y: input.count - 1)
 
         input.enumerated().forEach { y, line in

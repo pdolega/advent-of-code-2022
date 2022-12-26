@@ -22,32 +22,30 @@ class UnstableDiffusion {
         var round = 0
         var anyMovementHappened = true
 
-        let (_, totalTime) = Util.timed {
-            while anyMovementHappened && round < roundLimit {
-                round += 1
-                var nextPositions: [Point: Point] = [:]
+        while anyMovementHappened && round < roundLimit {
+            round += 1
+            var nextPositions: [Point: Point] = [:]
 
-                positions.forEach { elf in
-                    let proposal = proposeNewPosition(elf: elf, direction: startingDir, positions: positions, width: width, height: height)
-                    nextPositions[elf] = proposal
+            positions.forEach { elf in
+                let proposal = proposeNewPosition(elf: elf, direction: startingDir, positions: positions, width: width, height: height)
+                nextPositions[elf] = proposal
+            }
+
+            let posCount = countNextPositions(nextPositions: nextPositions)
+            nextPositions.forEach { prev, next in
+                if posCount[next] ?? 0 > 1 {
+                    nextPositions[prev] = prev
                 }
+            }
 
-                let posCount = countNextPositions(nextPositions: nextPositions)
-                nextPositions.forEach { prev, next in
-                    if posCount[next] ?? 0 > 1 {
-                        nextPositions[prev] = prev
-                    }
-                }
+            positions = Set(nextPositions.values)
+            startingDir = startingDir.next()
 
-                positions = Set(nextPositions.values)
-                startingDir = startingDir.next()
-
-                anyMovementHappened = nextPositions.contains { prev, next in
-                    prev != next
-                }
+            anyMovementHappened = nextPositions.contains { prev, next in
+                prev != next
+            }
 
 //            printGrid(msg: "Positions after round: \(round)", width: width, height: height, positions: positions)
-            }
         }
 
         let xs = positions.map { $0.x }
